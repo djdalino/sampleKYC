@@ -40,7 +40,7 @@ const StepOne = () => {
         ref={fileUploader}
         onChange={e => setUpload(URL.createObjectURL(e.target.files[0]))}
         style={{ display: "none" }}
-        accept="image/*"
+        accept="image/*;capture=camera"
         capture
       />
 
