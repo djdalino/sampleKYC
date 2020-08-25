@@ -1,0 +1,31 @@
+.bg-primary {
+  background-color: #3b5cf6 !important;
+}
+
+.box-h300 {
+  height: 300px;
+}
+.box-w300 {
+  width: 300px;
+}
+.box-h310 {
+  height: 310px;
+}
+.box-w150 {
+  width: 225px;
+}
+.border-inner-box {
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+}
+p {
+  margin: 0;
+}
+
+.box-img {
+  height: 290px;
+  left: 50%;
+  transform: translateX(-50%);
+}
