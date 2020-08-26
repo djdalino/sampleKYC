@@ -4,6 +4,7 @@ import Human from "../../Images/human.png";
 import HeaderContext from "../../context/HeaderContext";
 const StepOne = () => {
   const { stepOneUpload, setStepOneUpload } = useContext(HeaderContext);
+  const { count, setCount } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -14,6 +15,7 @@ const StepOne = () => {
       alert("Please input image");
     } else {
       alert("Image uploaded");
+      setCount(count + 1);
     }
   };
 

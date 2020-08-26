@@ -2,6 +2,7 @@ import HeaderContext from "./HeaderContext";
 import React, { useState } from "react";
 
 function ContextWrapper({ children }) {
+  const [count, setCount] = useState(0);
   const [src, setSrc] = useState(null);
   const [crop, setCrop] = useState({
     unit: "px", // default, can be 'px' or '%'
@@ -18,6 +19,8 @@ function ContextWrapper({ children }) {
   return (
     <HeaderContext.Provider
       value={{
+        count,
+        setCount,
         src,
         setSrc,
         crop,

@@ -13,12 +13,11 @@ const StepTwo = () => {
   };
   console.log(upload);
   const handleFileOnChange = e => {
-    // setSrc(URL.createObjectURL(e.target.files[0]));
-
     if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => setSrc(reader.result));
-      reader.readAsDataURL(e.target.files[0]);
+      setSrc(URL.createObjectURL(e.target.files[0]));
+      //   const reader = new FileReader();
+      //   reader.addEventListener("load", () => setSrc(reader.result));
+      //   reader.readAsDataURL(e.target.files[0]);
     }
   };
   const onSubmitFile = () => {
