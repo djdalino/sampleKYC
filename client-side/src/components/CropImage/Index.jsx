@@ -82,7 +82,7 @@ const CropImage = () => {
     <div className="position-fixed crop-container w-100 h-100 bg-light">
       <div className="position-relative">
         <div
-          className="text-center position-relative"
+          className="text-center position-fixed"
           style={{ height: "100vh", width: "100wh", margin: "auto" }}
         >
           {src && (
@@ -100,7 +100,7 @@ const CropImage = () => {
           <img alt="Crop" style={{ width: "100%" }} src={croppedImageUrl} />
         )} */}
         <div
-          className="text-center m-5 position-relative"
+          className="text-center m-5 position-fixed"
           style={{ zIndex: "1000" }}
         >
           <button className="btn btn-primary" onClick={getCroppedImg}>

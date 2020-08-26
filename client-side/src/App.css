@@ -61,3 +61,18 @@ p {
   width: 268px !important;
   height: 178px !important;
 }
+
+#root
+  > div.position-fixed.crop-container.w-100.h-100.bg-light
+  > div
+  > div:nth-child(1) {
+  position: fixed !important;
+  top: 0;
+}
+#root
+  > div.position-fixed.crop-container.w-100.h-100.bg-light
+  > div
+  > div.text-center.m-5.position-fixed {
+  width: 75%;
+  bottom: 0;
+}
