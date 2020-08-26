@@ -4,7 +4,11 @@ import React, { useState } from "react";
 function ContextWrapper({ children }) {
   const [src, setSrc] = useState(null);
   const [crop, setCrop] = useState({
-    aspect: 16 / 9
+    unit: "px", // default, can be 'px' or '%'
+    x: 15,
+    y: 15,
+    width: 50,
+    height: 50
   });
   const [croppedImageUrl, setCroppedImageUrl] = useState(null);
   const [upload, setUpload] = useState([]);

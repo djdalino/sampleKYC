@@ -60,7 +60,7 @@ const CropImage = () => {
       crop.height
     );
     // As Base64 string
-    const base64Image = canvas.toDataURL("image/jpeg");
+    const base64Image = canvas.toDataURL("image/png");
     setUpload([...upload, base64Image]);
     setSrc(null);
     // return new Promise((resolve, reject) => {
@@ -97,8 +97,8 @@ const CropImage = () => {
         </div>
 
         {/* {croppedImageUrl && (
-        <img alt="Crop" style={{ width: "100%" }} src={croppedImageUrl} />
-      )} */}
+          <img alt="Crop" style={{ width: "100%" }} src={croppedImageUrl} />
+        )} */}
         <div
           className="text-center m-5 position-relative"
           style={{ zIndex: "1000" }}
