@@ -11,7 +11,6 @@ const StepTwo = () => {
   const handleInputFile = () => {
     fileUploader.current.click();
   };
-  console.log(upload);
   const handleFileOnChange = e => {
     if (e.target.files && e.target.files.length > 0) {
       setSrc(URL.createObjectURL(e.target.files[0]));
@@ -33,10 +32,8 @@ const StepTwo = () => {
   };
   const deleteItem = id => {
     const findOne = upload.map(d => d);
-    console.log(findOne[id]);
-    const deleteOne = upload.filter(d => d);
+    // const deleteOne = upload.filter(d => d);
     setUpload(upload.filter(d => d !== findOne[id]));
-    console.log(`delete: ${deleteOne[id]}`);
     setSrc(null);
   };
   return (

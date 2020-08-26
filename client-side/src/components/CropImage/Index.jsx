@@ -83,7 +83,7 @@ const CropImage = () => {
       <div className="position-relative">
         <div
           className="text-center position-relative"
-          style={{ height: "80vh", width: "100wh", margin: "auto" }}
+          style={{ height: "100vh", width: "100wh", margin: "auto" }}
         >
           {src && (
             <ReactCrop
