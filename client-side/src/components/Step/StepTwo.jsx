@@ -76,7 +76,7 @@ const StepOne = () => {
                 <span aria-hidden="true">&times;</span>
               </button>
               <img
-                className="h-100"
+                className="img-fluid"
                 src={upload[upload.length - 1]}
                 alt="Your Selfie"
                 height="100%"
