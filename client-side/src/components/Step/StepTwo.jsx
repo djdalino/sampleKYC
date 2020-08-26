@@ -51,7 +51,7 @@ const StepOne = () => {
       <p className="text-center"> Choose 2 images only {upload.length}/2</p>
       <div className="border position-relative mx-auto box-h200 box-w300">
         <div className="position-absolute border-inner-box box-h210 box-w225"></div>
-        <div className="position-absolute box-img w-90 py-10">
+        <div className="position-absolute box-img w-90 h-100 py-10">
           {upload.length < 1 ? (
             <img
               src={Card}
@@ -84,12 +84,6 @@ const StepOne = () => {
               />
             </div>
           )}
-          {/* <img
-            src={upload.length < 1 ? Card : upload[upload.length - 1]}
-            alt="Your Selfie"
-            height="100%"
-            width="100%"
-          /> */}
         </div>
       </div>
 
