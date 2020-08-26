@@ -37,7 +37,7 @@ const StepOne = () => {
       </div>
       <p className="text-center">End of your torso</p>
 
-      <div className="my-3 text-center">
+      <div className="my-3 text-center text-warning">
         <p>1. Keep a neutral face (no smiling)</p>
         <p>2. Make sure your in focus</p>
         <p>3. Follow guideline below</p>

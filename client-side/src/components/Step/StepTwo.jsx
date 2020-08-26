@@ -5,7 +5,7 @@ import Step from "../Common/Step";
 import Card from "../../Images/card.png";
 const StepTwo = () => {
   const { upload, setUpload } = useContext(HeaderContext);
-  const { setSrc } = useContext(HeaderContext);
+  const { src, setSrc } = useContext(HeaderContext);
   //   const [count, setCount] = useState(0);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
@@ -13,8 +13,13 @@ const StepTwo = () => {
   };
 
   const handleFileOnChange = e => {
-    setUpload([...upload, URL.createObjectURL(e.target.files[0])]);
-    setSrc(URL.createObjectURL(e.target.files[0]));
+    // setSrc(URL.createObjectURL(e.target.files[0]));
+
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setSrc(reader.result));
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
   const onSubmitFile = () => {
     if (upload.length === 0) {
@@ -80,6 +85,7 @@ const StepTwo = () => {
                 <span aria-hidden="true">&times;</span>
               </button>
               <img
+                className="img-fluid"
                 src={upload[upload.length - 1]}
                 alt="Your Selfie"
                 height="100%"
@@ -91,7 +97,7 @@ const StepTwo = () => {
         </div>
       </div>
 
-      <div className="my-3 text-center">
+      <div className="my-3 text-center text-warning">
         <p>1. One photo per ID</p>
         <p>2. Take the photo as close as possible</p>
         <p>3. Make sure your in focus</p>

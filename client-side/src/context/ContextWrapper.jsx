@@ -5,12 +5,16 @@ function ContextWrapper({ children }) {
   const [src, setSrc] = useState(null);
   const [crop, setCrop] = useState({
     unit: "%",
-    width: 30,
-    aspect: 16 / 9
+    width: 100,
+    height: 100,
+    x: 0,
+    y: 0
   });
   const [croppedImageUrl, setCroppedImageUrl] = useState(null);
   const [upload, setUpload] = useState([]);
   const [stepOneUpload, setStepOneUpload] = useState(null);
+  let [imageRef] = useState(null);
+  let [fileUrl] = useState(null);
   return (
     <HeaderContext.Provider
       value={{
@@ -23,7 +27,9 @@ function ContextWrapper({ children }) {
         stepOneUpload,
         setStepOneUpload,
         croppedImageUrl,
-        setCroppedImageUrl
+        setCroppedImageUrl,
+        imageRef,
+        fileUrl
       }}
     >
       {children}

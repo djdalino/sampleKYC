@@ -57,3 +57,7 @@ p {
   z-index: 1000;
   top: 0;
 }
+.img-fluid {
+  width: 268px !important;
+  height: 178px !important;
+}
