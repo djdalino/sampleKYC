@@ -109,6 +109,7 @@ const StepTwo = () => {
         onChange={handleFileOnChange}
         style={{ display: "none" }}
         accept="image/*"
+        capture
       />
 
       <div className="text-center">
