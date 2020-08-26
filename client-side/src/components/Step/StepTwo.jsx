@@ -1,11 +1,11 @@
 import React, { useContext, useRef } from "react";
 import HeaderContext from "../../context/HeaderContext";
-import CropImage from "../CropImage/Index";
+// import CropImage from "../CropImage/Index";
 import Step from "../Common/Step";
 import Card from "../../Images/card.png";
 const StepTwo = () => {
   const { upload, setUpload } = useContext(HeaderContext);
-  const { src, setSrc } = useContext(HeaderContext);
+  const { setSrc } = useContext(HeaderContext);
   //   const [count, setCount] = useState(0);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
