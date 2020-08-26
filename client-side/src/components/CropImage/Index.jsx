@@ -86,7 +86,7 @@ const CropImage = () => {
     <div className="position-fixed crop-container w-100 h-100 bg-light">
       <div
         className="text-center"
-        style={{ height: "90vh", width: "100wh", margin: "auto" }}
+        style={{ height: "80vh", width: "100wh", margin: "auto" }}
       >
         {src && (
           <ReactCrop
