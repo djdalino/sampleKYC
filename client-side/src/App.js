@@ -9,7 +9,6 @@ function App() {
     <React.Fragment>
       <Navbar />
       <Hero data="Secure you account in 3 simple step" />
-
       <StepTwo />
     </React.Fragment>
   );
