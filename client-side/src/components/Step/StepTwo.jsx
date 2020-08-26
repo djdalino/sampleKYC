@@ -3,7 +3,7 @@ import Step from "../Common/Step";
 import Card from "../../Images/card.png";
 const StepOne = () => {
   const [upload, setUpload] = useState([]);
-  const [count, setCount] = useState(0);
+  //   const [count, setCount] = useState(0);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
