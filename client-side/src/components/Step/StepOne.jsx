@@ -32,7 +32,9 @@ const StepOne = () => {
         <div className="position-absolute box-img w-75 py-10">
           <ExifOrientationImg
             src={stepOneUpload ? stepOneUpload : Human}
-            alt="Selfie Picture"
+            alt="Selfie"
+            height="100%"
+            width="100%"
           />
           {/* <img
             src={stepOneUpload ? stepOneUpload : Human}
