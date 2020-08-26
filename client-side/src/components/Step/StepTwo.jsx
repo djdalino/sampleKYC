@@ -11,7 +11,6 @@ const StepOne = () => {
 
   const handleFileOnChange = e => {
     setUpload([...upload, URL.createObjectURL(e.target.files[0])]);
-    setCount(e.target.files.length);
   };
   console.log(upload);
   const onSubmitFile = () => {
