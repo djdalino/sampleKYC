@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Step from "../Common/Step";
 import Human from "../../Images/human.png";
 const StepOne = () => {
   const [upload, setUpload] = useState(null);
@@ -8,17 +9,23 @@ const StepOne = () => {
   };
   console.log(upload);
   const onSubmitFile = () => {
-    alert("Image uploaded");
+    if (!upload) {
+      alert("Please input image");
+    } else {
+      alert("Image uploaded");
+    }
   };
+
   return (
     <React.Fragment>
+      <Step step="Step 1" data="take a selfie" />
       <p className="text-center">Top of your head</p>
       <div
         className="border position-relative mx-auto box-h300 box-w300"
         onClick={handleInputFile}
       >
-        <div className="position-absolute border-inner-box box-h310 box-w150"></div>
-        <div className="position-absolute box-img w-75">
+        <div className="position-absolute border-inner-box box-h310 box-w225"></div>
+        <div className="position-absolute box-img w-75 py-10">
           <img
             src={upload ? upload : Human}
             alt="Your Selfie"

@@ -2,16 +2,16 @@ import React from "react";
 import CamPlus from "../../Images/camPlus.png";
 const Step = ({ step, data }) => {
   return (
-    <div className="d-flex justify-content-center my-2">
+    <div className="d-flex justify-content-center my-3">
       <div className="px-1">
-        <img src={CamPlus} alt="Cam Plus" height="35" width="35" />
+        <img src={CamPlus} alt="Cam Plus" height="25" width="25" />
       </div>
-      <h3 className="px-1" style={{ color: "#3b5cf6" }}>
+      <h5 className="px-1" style={{ color: "#3b5cf6" }}>
         {step}
-      </h3>
-      <h3 className="px-1" style={{ color: "grey" }}>
+      </h5>
+      <h5 className="px-1" style={{ color: "grey" }}>
         {data}
-      </h3>
+      </h5>
     </div>
   );
 };
