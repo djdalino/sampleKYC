@@ -33,6 +33,7 @@ const StepOne = () => {
           <ExifOrientationImg
             src={stepOneUpload ? stepOneUpload : Human}
             alt="Selfie"
+            style={{ transform: "rotate(45degs)" }}
             height="100%"
             width="100%"
           />
