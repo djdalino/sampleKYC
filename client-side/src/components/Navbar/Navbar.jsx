@@ -1,31 +1,41 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import HeaderContext from "../../context/HeaderContext";
+import CropImage from "../CropImage/Index";
 const Navbar = () => {
+  const { src } = useContext(HeaderContext);
   return (
-    <div className="fixed-top mb-5">
-      <div className="collapse" id="navbarToggleExternalContent">
-        <div className="bg-dark p-4">
-          <h5 className="text-white h4">Collapsed content</h5>
-          <span className="text-muted">Toggleable via the navbar brand.</span>
+    <React.Fragment>
+      {src ? (
+        <CropImage />
+      ) : (
+        <div className="fixed-top mb-5">
+          <div className="collapse" id="navbarToggleExternalContent">
+            <div className="bg-dark p-4">
+              <h5 className="text-white h4">Collapsed content</h5>
+              <span className="text-muted">
+                Toggleable via the navbar brand.
+              </span>
+            </div>
+          </div>
+          <nav className="navbar navbar-light bg-light">
+            <div className="container-sm">
+              <button
+                className="navbar-toggler ml-auto"
+                style={{ color: "red" }}
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarToggleExternalContent"
+                aria-controls="navbarToggleExternalContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon "></span>
+              </button>
+            </div>
+          </nav>
         </div>
-      </div>
-      <nav className="navbar navbar-light bg-light">
-        <div className="container-sm">
-          <button
-            className="navbar-toggler ml-auto"
-            style={{ color: "red" }}
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarToggleExternalContent"
-            aria-controls="navbarToggleExternalContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon "></span>
-          </button>
-        </div>
-      </nav>
-    </div>
+      )}
+    </React.Fragment>
   );
 };
 

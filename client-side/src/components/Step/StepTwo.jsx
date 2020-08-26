@@ -1,8 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useContext, useRef } from "react";
+import HeaderContext from "../../context/HeaderContext";
+import CropImage from "../CropImage/Index";
 import Step from "../Common/Step";
 import Card from "../../Images/card.png";
-const StepOne = () => {
-  const [upload, setUpload] = useState([]);
+const StepTwo = () => {
+  const { upload, setUpload } = useContext(HeaderContext);
+  const { src, setSrc } = useContext(HeaderContext);
   //   const [count, setCount] = useState(0);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
@@ -11,8 +14,8 @@ const StepOne = () => {
 
   const handleFileOnChange = e => {
     setUpload([...upload, URL.createObjectURL(e.target.files[0])]);
+    setSrc(URL.createObjectURL(e.target.files[0]));
   };
-  console.log(upload);
   const onSubmitFile = () => {
     if (upload.length === 0) {
       alert("Please input image");
@@ -30,6 +33,7 @@ const StepOne = () => {
     const deleteOne = upload.filter(d => d);
     setUpload(upload.filter(d => d !== findOne[id]));
     console.log(`delete: ${deleteOne[id]}`);
+    setSrc(null);
   };
   return (
     <React.Fragment>
@@ -111,4 +115,4 @@ const StepOne = () => {
   );
 };
 
-export default StepOne;
+export default StepTwo;

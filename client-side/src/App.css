@@ -53,3 +53,7 @@ p {
   left: 50%;
   transform: translateX(-50%);
 }
+.crop-container {
+  z-index: 1000;
+  top: 0;
+}

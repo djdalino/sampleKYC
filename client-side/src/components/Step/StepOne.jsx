@@ -1,15 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Step from "../Common/Step";
 import Human from "../../Images/human.png";
+import HeaderContext from "../../context/HeaderContext";
 const StepOne = () => {
-  const [upload, setUpload] = useState(null);
+  const { stepOneUpload, setStepOneUpload } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
   };
-  console.log(upload);
+  console.log(stepOneUpload);
   const onSubmitFile = () => {
-    if (!upload) {
+    if (!stepOneUpload) {
       alert("Please input image");
     } else {
       alert("Image uploaded");
@@ -27,7 +28,7 @@ const StepOne = () => {
         <div className="position-absolute border-inner-box box-h310 box-w225"></div>
         <div className="position-absolute box-img w-75 py-10">
           <img
-            src={upload ? upload : Human}
+            src={stepOneUpload ? stepOneUpload : Human}
             alt="Your Selfie"
             height="100%"
             width="100%"
@@ -45,7 +46,7 @@ const StepOne = () => {
         type="file"
         id="file"
         ref={fileUploader}
-        onChange={e => setUpload(URL.createObjectURL(e.target.files[0]))}
+        onChange={e => setStepOneUpload(URL.createObjectURL(e.target.files[0]))}
         style={{ display: "none" }}
         accept="image/*"
         capture
