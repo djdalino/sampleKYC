@@ -84,27 +84,34 @@ const CropImage = () => {
   };
   return (
     <div className="position-fixed crop-container w-100 h-100 bg-light">
-      <div
-        className="text-center"
-        style={{ height: "80vh", width: "100wh", margin: "auto" }}
-      >
-        {src && (
-          <ReactCrop
-            src={src}
-            crop={crop}
-            ruleOfThirds
-            onImageLoaded={onImageLoaded}
-            onComplete={onCropComplete}
-            onChange={onCropChange}
-          />
-        )}
-      </div>
+      <div className="position-relative">
+        <div
+          className="text-center position-relative"
+          style={{ height: "80vh", width: "100wh", margin: "auto" }}
+        >
+          {src && (
+            <ReactCrop
+              src={src}
+              crop={crop}
+              ruleOfThirds
+              onImageLoaded={onImageLoaded}
+              onComplete={onCropComplete}
+              onChange={onCropChange}
+            />
+          )}
+        </div>
 
-      {/* {croppedImageUrl && (
+        {/* {croppedImageUrl && (
         <img alt="Crop" style={{ width: "100%" }} src={croppedImageUrl} />
       )} */}
-      <div className="text-center">
-        <button onClick={onSelectedCrop}>Submit</button>
+        <div
+          className="text-center m-5 position-relative"
+          style={{ zIndex: "1000" }}
+        >
+          <button className="btn btn-primary" onClick={onSelectedCrop}>
+            Crop
+          </button>
+        </div>
       </div>
     </div>
   );
