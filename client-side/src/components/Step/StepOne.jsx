@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import Step from "../Common/Step";
 import Human from "../../Images/human.png";
 import HeaderContext from "../../context/HeaderContext";
-import Img from "react-fix-image-orientation";
+import ExifOrientationImg from "react-exif-orientation-img";
 const StepOne = () => {
   const { stepOneUpload, setStepOneUpload } = useContext(HeaderContext);
   const { count, setCount } = useContext(HeaderContext);
@@ -30,7 +30,8 @@ const StepOne = () => {
       >
         <div className="position-absolute border-inner-box box-h310 box-w225"></div>
         <div className="position-absolute box-img w-75 py-10">
-          <Img
+          <ExifOrientationImg
+            crossOrigin="anonymous"
             src={stepOneUpload ? stepOneUpload : Human}
             alt="Selfie"
             height="100%"
