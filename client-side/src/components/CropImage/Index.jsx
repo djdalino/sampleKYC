@@ -7,8 +7,7 @@ const CropImage = () => {
   const { upload, setUpload } = useContext(HeaderContext);
   const { crop, setCrop } = useContext(HeaderContext);
   const { croppedImageUrl, setCroppedImageUrl } = useContext(HeaderContext);
-  let { imageRef } = useContext(HeaderContext);
-  let { fileUrl } = useContext(HeaderContext);
+
   //   const onSelectFile = e => {
   //     if (e.target.files && e.target.files.length > 0) {
   //       const reader = new FileReader();
@@ -17,40 +16,40 @@ const CropImage = () => {
   //     }
   //   };
 
-  const onImageLoaded = image => {
-    imageRef = image;
-  };
+  //   const onImageLoaded = image => {
+  //     imageRef = image;
+  //   };
 
-  const onCropComplete = crop => {
-    makeClientCrop(crop);
-  };
+  //   const onCropComplete = crop => {
+  //     makeClientCrop(crop);
+  //   };
 
-  const onCropChange = (crop, percentCrop) => {
-    // You could also use percentCrop:
-    // setState({ crop: percentCrop });
-    setCrop(crop);
-  };
-  const makeClientCrop = async crop => {
-    if (imageRef && crop.width && crop.height) {
-      const croppedImageUrl = await getCroppedImg(
-        imageRef,
-        crop,
-        "newFile.jpeg"
-      );
-      setCroppedImageUrl(croppedImageUrl);
-    }
-  };
+  //   const onCropChange = (crop, percentCrop) => {
+  //     // You could also use percentCrop:
+  //     // setState({ crop: percentCrop });
+  //     setCrop(crop);
+  //   };
+  //   const makeClientCrop = async crop => {
+  //     if (imageRef && crop.width && crop.height) {
+  //       const croppedImageUrl = await getCroppedImg(
+  //         imageRef,
+  //         crop,
+  //         "newFile.jpeg"
+  //       );
+  //       setCroppedImageUrl(croppedImageUrl);
+  //     }
+  //   };
 
-  const getCroppedImg = (image, crop, fileName) => {
+  const getCroppedImg = () => {
     const canvas = document.createElement("canvas");
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
+    const scaleX = croppedImageUrl.naturalWidth / croppedImageUrl.width;
+    const scaleY = croppedImageUrl.naturalHeight / croppedImageUrl.height;
     canvas.width = crop.width;
     canvas.height = crop.height;
     const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
-      image,
+      croppedImageUrl,
       crop.x * scaleX,
       crop.y * scaleY,
       crop.width * scaleX,
@@ -60,28 +59,25 @@ const CropImage = () => {
       crop.width,
       crop.height
     );
-
-    return new Promise((resolve, reject) => {
-      canvas.toBlob(blob => {
-        if (!blob) {
-          //reject(new Error('Canvas is empty'));
-          console.error("Canvas is empty");
-          return;
-        }
-        blob.name = fileName;
-        window.URL.revokeObjectURL(fileUrl);
-        fileUrl = window.URL.createObjectURL(blob);
-        resolve(fileUrl);
-      }, "image/jpeg");
-    });
-  };
-  console.log(croppedImageUrl);
-  const onSelectedCrop = () => {
-    setUpload([...upload, croppedImageUrl]);
-
-    // setUpload(load => [...load, croppedImageUrl]);
+    // As Base64 string
+    const base64Image = canvas.toDataURL("image/jpeg");
+    setUpload([...upload, base64Image]);
     setSrc(null);
+    // return new Promise((resolve, reject) => {
+    //   canvas.toBlob(blob => {
+    //     if (!blob) {
+    //       //reject(new Error('Canvas is empty'));
+    //       console.error("Canvas is empty");
+    //       return;
+    //     }
+    //     blob.name = fileName;
+    //     window.URL.revokeObjectURL(fileUrl);
+    //     fileUrl = window.URL.createObjectURL(blob);
+    //     resolve(fileUrl);
+    //   }, "image/jpeg");
+    // });
   };
+
   return (
     <div className="position-fixed crop-container w-100 h-100 bg-light">
       <div className="position-relative">
@@ -94,9 +90,8 @@ const CropImage = () => {
               src={src}
               crop={crop}
               ruleOfThirds
-              onImageLoaded={onImageLoaded}
-              onComplete={onCropComplete}
-              onChange={onCropChange}
+              onImageLoaded={setCroppedImageUrl}
+              onChange={setCrop}
             />
           )}
         </div>
@@ -108,7 +103,7 @@ const CropImage = () => {
           className="text-center m-5 position-relative"
           style={{ zIndex: "1000" }}
         >
-          <button className="btn btn-primary" onClick={onSelectedCrop}>
+          <button className="btn btn-primary" onClick={getCroppedImg}>
             Crop
           </button>
         </div>
