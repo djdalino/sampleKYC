@@ -3,6 +3,7 @@ import Step from "../Common/Step";
 import Human from "../../Images/human.png";
 import HeaderContext from "../../context/HeaderContext";
 import ExifOrientationImg from "react-exif-orientation-img";
+import loadImage from "blueimp-load-image/js";
 const StepOne = () => {
   const { stepOneUpload, setStepOneUpload } = useContext(HeaderContext);
   const { count, setCount } = useContext(HeaderContext);
@@ -10,7 +11,21 @@ const StepOne = () => {
   const handleInputFile = () => {
     fileUploader.current.click();
   };
-  console.log(stepOneUpload);
+  const onSelectFile = e => {
+    if (e.target.files && e.target.files.length > 0) {
+      loadImage(
+        e.target.files[0],
+        setStepOneUpload(URL.createObjectURL(e.target.files[0])),
+        { orientation: true }
+      );
+
+      // const reader = new FileReader();
+      // reader.addEventListener('load', () =>
+      //   this.setState({ src: reader.result })
+      // );
+      // reader.readAsDataURL(e.target.files[0]);
+    }
+  };
   const onSubmitFile = () => {
     if (!stepOneUpload) {
       alert("Please input image");
@@ -56,7 +71,7 @@ const StepOne = () => {
         type="file"
         id="file"
         ref={fileUploader}
-        onChange={e => setStepOneUpload(URL.createObjectURL(e.target.files[0]))}
+        onChange={onSelectFile}
         style={{ display: "none" }}
         accept="image/*"
         capture
