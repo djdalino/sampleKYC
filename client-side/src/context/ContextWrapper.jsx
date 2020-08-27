@@ -4,6 +4,7 @@ import React, { useState } from "react";
 function ContextWrapper({ children }) {
   const [count, setCount] = useState(0);
   const [src, setSrc] = useState(null);
+  const [srcStepTwoB, setSrcStepTwoB] = useState(null);
   const [crop, setCrop] = useState({
     unit: "px", // default, can be 'px' or '%'
     x: 15,
@@ -14,6 +15,7 @@ function ContextWrapper({ children }) {
   const [croppedImageUrl, setCroppedImageUrl] = useState(null);
   const [upload, setUpload] = useState([]);
   const [stepOneUpload, setStepOneUpload] = useState(null);
+  const [stepTwoUploadB, setStepTwoUploadB] = useState([]);
   let [imageRef] = useState(null);
   let [fileUrl] = useState(null);
   return (
@@ -23,12 +25,16 @@ function ContextWrapper({ children }) {
         setCount,
         src,
         setSrc,
+        srcStepTwoB,
+        setSrcStepTwoB,
         crop,
         setCrop,
         upload,
         setUpload,
         stepOneUpload,
         setStepOneUpload,
+        stepTwoUploadB,
+        setStepTwoUploadB,
         croppedImageUrl,
         setCroppedImageUrl,
         imageRef,

@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import HeaderContext from "../../context/HeaderContext";
 import CropImage from "../CropImage/Index";
+import CropImageStepTwoB from "../CropImage/StepTwoB";
 const Navbar = () => {
   const { src } = useContext(HeaderContext);
+  const { srcStepTwoB } = useContext(HeaderContext);
   return (
     <React.Fragment>
       {src ? (
         <CropImage />
+      ) : srcStepTwoB ? (
+        <CropImageStepTwoB />
       ) : (
         <div className="fixed-top mb-5">
           <div className="collapse" id="navbarToggleExternalContent">

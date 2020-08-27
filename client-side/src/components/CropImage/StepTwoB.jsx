@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import HeaderContext from "../../context/HeaderContext";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-const CropImage = () => {
-  const { src, setSrc } = useContext(HeaderContext);
-  const { upload, setUpload } = useContext(HeaderContext);
+const CropImageStepTwoB = () => {
+  const { srcStepTwoB, setSrcStepTwoB } = useContext(HeaderContext);
+
+  const { stepTwoUploadB, setStepTwoUploadB } = useContext(HeaderContext);
   const { crop, setCrop } = useContext(HeaderContext);
   const { croppedImageUrl, setCroppedImageUrl } = useContext(HeaderContext);
 
@@ -61,8 +62,8 @@ const CropImage = () => {
     );
     // As Base64 string
     const base64Image = canvas.toDataURL("image/png");
-    setUpload([...upload, base64Image]);
-    setSrc(null);
+    setStepTwoUploadB([...stepTwoUploadB, base64Image]);
+    setSrcStepTwoB(null);
     setCrop({
       unit: "px", // default, can be 'px' or '%'
       x: 15,
@@ -92,9 +93,9 @@ const CropImage = () => {
           className="text-center position-fixed"
           style={{ height: "100vh", width: "100wh", margin: "auto" }}
         >
-          {src && (
+          {srcStepTwoB && (
             <ReactCrop
-              src={src}
+              src={srcStepTwoB}
               crop={crop}
               ruleOfThirds
               onImageLoaded={setCroppedImageUrl}
@@ -119,4 +120,4 @@ const CropImage = () => {
   );
 };
 
-export default CropImage;
+export default CropImageStepTwoB;

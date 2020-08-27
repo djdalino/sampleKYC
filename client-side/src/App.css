@@ -12,6 +12,12 @@ p {
 .box-h210 {
   height: 210px;
 }
+.box-h250 {
+  height: 250px;
+}
+.box-h260 {
+  height: 260px;
+}
 .box-h300 {
   height: 300px;
 }
@@ -38,6 +44,9 @@ p {
 }
 .h-178 {
   height: 178px;
+}
+.h-248 {
+  height: 238px;
 }
 .border-inner-box {
   top: -5px;
@@ -75,4 +84,8 @@ p {
   > div.text-center.m-5.position-fixed {
   width: 75%;
   bottom: 0;
+}
+
+.img-fluid-step-two-b {
+  height: 224px !important;
 }
