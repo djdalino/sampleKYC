@@ -87,5 +87,5 @@ p {
 }
 
 .img-fluid-step-two-b {
-  height: 224px !important;
+  height: 100% !important;
 }

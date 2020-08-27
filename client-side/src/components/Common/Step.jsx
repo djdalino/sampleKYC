@@ -4,11 +4,11 @@ const Step = ({ step, data }) => {
   return (
     <div className="d-flex justify-content-center my-3 mb-4 px-2">
       <div className="px-1">
-        <img src={CamPlus} alt="Cam Plus" height="30" width="30" />
+        <img src={CamPlus} alt="Cam Plus" height="27" width="27" />
       </div>
       <h5
         className="px-1"
-        style={{ color: "#3b5cf6", width: "72px", fontSize: "22px" }}
+        style={{ color: "#3b5cf6", width: "75px", fontSize: "22px" }}
       >
         {step}
       </h5>
