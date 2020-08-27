@@ -38,6 +38,22 @@ const StepOne = () => {
   return (
     <React.Fragment>
       <Step step="Step 1" data="take a selfie" />
+      {stepOneUpload ? (
+        <div
+          className="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Succesfully added photo!</strong>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ) : null}
       <p className="text-center">Top of your head</p>
       <div
         className="border position-relative mx-auto box-h300 box-w300"
@@ -77,7 +93,7 @@ const StepOne = () => {
         capture
       />
 
-      <div className="text-center">
+      <div className="text-center mb-5">
         <button onClick={() => onSubmitFile()} className="btn btn-danger">
           Send Photo
         </button>

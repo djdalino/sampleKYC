@@ -58,6 +58,37 @@ const StepTwo = () => {
   return (
     <React.Fragment>
       <Step step="Step 2" data="Take a Photo of 2 valid id" />
+      {upload.length === 1 ? (
+        <div
+          className="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Succesfully added photo!</strong> upload 1 more
+          <button
+            type="button"
+            className="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ) : upload.length >= 2 ? (
+        <div
+          className="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Succesfully added photos!</strong>
+          <button
+            type="button"
+            className="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ) : null}
       <div className="mb-5">
         <p
           className="text-center"
@@ -72,7 +103,7 @@ const StepTwo = () => {
           Driver's License, Voter's ID, Passport, SSS ID
         </p>
       </div>
-      <p className="text-center"> Choose 2 images only {upload.length}/2</p>
+      <p className="text-center mb-1">Choose 2 images only {upload.length}/2</p>
       <div className="border position-relative mx-auto box-h200 box-w300">
         <div className="position-absolute border-inner-box box-h210 box-w225"></div>
         <div className="position-absolute box-img w-90 h-100 py-10">
