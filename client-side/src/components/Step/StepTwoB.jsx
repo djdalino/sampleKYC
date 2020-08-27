@@ -6,7 +6,6 @@ import IdWithFace from "../../Images/withID.png";
 import loadImage from "blueimp-load-image/js";
 const StepTwo = () => {
   const { stepTwoUploadB, setStepTwoUploadB } = useContext(HeaderContext);
-  const { setSrcStepTwoB } = useContext(HeaderContext);
   //   const [count, setCount] = useState(0);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
@@ -16,7 +15,10 @@ const StepTwo = () => {
     if (e.target.files && e.target.files.length > 0) {
       loadImage(
         e.target.files[0],
-        setSrcStepTwoB(URL.createObjectURL(e.target.files[0])),
+        setStepTwoUploadB([
+          ...stepTwoUploadB,
+          URL.createObjectURL(e.target.files[0])
+        ]),
         { orientation: true }
       );
 
@@ -42,7 +44,6 @@ const StepTwo = () => {
     const findOne = stepTwoUploadB.map(d => d);
     // const deleteOne = upload.filter(d => d);
     setStepTwoUploadB(stepTwoUploadB.filter(d => d !== findOne[id]));
-    setSrcStepTwoB(null);
   };
   return (
     <React.Fragment>

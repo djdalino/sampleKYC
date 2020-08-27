@@ -1,3 +1,5 @@
+//use this if need to crop image
+
 import React, { useContext } from "react";
 import HeaderContext from "../../context/HeaderContext";
 import ReactCrop from "react-image-crop";
