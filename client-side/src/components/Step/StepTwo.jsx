@@ -4,7 +4,6 @@ import HeaderContext from "../../context/HeaderContext";
 import Step from "../Common/Step";
 import Card from "../../Images/card.png";
 import loadImage from "blueimp-load-image/js";
-import ExifOrientationImg from "react-exif-orientation-img";
 const StepTwo = () => {
   const { upload, setUpload } = useContext(HeaderContext);
   const { setSrc } = useContext(HeaderContext);
@@ -17,7 +16,7 @@ const StepTwo = () => {
     if (e.target.files && e.target.files.length > 0) {
       loadImage(
         e.target.files[0],
-        setStepOneUpload(URL.createObjectURL(e.target.files[0])),
+        setSrc(URL.createObjectURL(e.target.files[0])),
         { orientation: true }
       );
 
@@ -89,7 +88,7 @@ const StepTwo = () => {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
-              <ExifOrientationImg
+              <img
                 className="img-fluid"
                 src={upload[upload.length - 1]}
                 alt="Your Selfie"
