@@ -112,7 +112,7 @@ const StepTwo = () => {
               onClick={handleInputFile}
             />
           ) : (
-            <div className="position-relative h-238">
+            <div className="position-relative h-100">
               <button
                 className="close position-absolute"
                 style={{
