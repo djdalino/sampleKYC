@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Human from "../../Images/docsWithID.png";
 import Camera from "../../Images/camera.png";
 import Upload from "../../Images/upload.png";
@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 
 const StepOne = () => {
   const { stepThreeUpload, setStepThreeUpload } = useContext(HeaderContext);
-
+  const [isLoading, setIsLoading] = useState(false);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -16,7 +16,8 @@ const StepOne = () => {
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
       setStepThreeUpload(URL.createObjectURL(e.target.files[0]));
-      console.log(URL.createObjectURL(e.target.files[0]));
+      console.log(e.target.files);
+      setIsLoading(true);
     }
   };
   const onSubmitFile = () => {
@@ -29,6 +30,12 @@ const StepOne = () => {
   const deleteItem = () => {
     setStepThreeUpload(null);
   };
+  // React.useEffect(() => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 5000);
+  // }, []);
   return (
     <React.Fragment>
       {stepThreeUpload ? (
@@ -58,7 +65,7 @@ const StepOne = () => {
         <div className="position-absolute border-inner-box box-h310 box-w225"></div>
         <div className="position-absolute box-img w-75 py-10">
           {stepThreeUpload ? (
-            <div className="position-relative h-100">
+            <div className="position-relative h-100 w-100">
               <button
                 className="close position-absolute"
                 style={{
@@ -72,13 +79,24 @@ const StepOne = () => {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
+              {isLoading && (
+                <div
+                  className="spinner-border text-primary isLoading"
+                  role="status"
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>
+              )}
+
               <ReactPlayer
                 controls
                 playing
                 height="100%"
                 width="100%"
                 url={stepThreeUpload}
-                onDuration={console.log("duration")}
+                onReady={() => {
+                  setIsLoading(false);
+                }}
               />
             </div>
           ) : (
@@ -118,7 +136,7 @@ const StepOne = () => {
             src={Upload}
             alt="upload"
           />
-          Send Photo
+          Send Video
         </button>
       </div>
     </React.Fragment>
