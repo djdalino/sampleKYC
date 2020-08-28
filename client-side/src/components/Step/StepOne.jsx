@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from "react";
 import Step from "../Common/Step";
 import Human from "../../Images/human.png";
+import Upload from "../../Images/upload.png";
 import HeaderContext from "../../context/HeaderContext";
 import ExifOrientationImg from "react-exif-orientation-img";
 import loadImage from "blueimp-load-image/js";
@@ -93,7 +94,17 @@ const StepOne = () => {
       />
 
       <div className="text-center mb-5">
-        <button onClick={() => onSubmitFile()} className="btn btn-danger">
+        <button
+          onClick={() => onSubmitFile()}
+          className="btn btn-danger py-3 px-5"
+          style={{ fontSize: "24px" }}
+        >
+          <img
+            className="mr-4 pb-1"
+            style={{ height: "30px" }}
+            src={Upload}
+            alt="upload"
+          />
           Send Photo
         </button>
       </div>

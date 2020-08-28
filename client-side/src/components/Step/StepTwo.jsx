@@ -3,6 +3,7 @@ import HeaderContext from "../../context/HeaderContext";
 // import CropImage from "../CropImage/Index";
 import Step from "../Common/Step";
 import Card from "../../Images/card.png";
+import Upload from "../../Images/upload.png";
 import loadImage from "blueimp-load-image/js";
 const StepTwo = () => {
   const { upload, setUpload } = useContext(HeaderContext);
@@ -179,8 +180,18 @@ const StepTwo = () => {
         accept="image/*"
       />
 
-      <div className="text-center">
-        <button onClick={() => onSubmitFile()} className="btn btn-danger">
+      <div className="text-center mb-5">
+        <button
+          onClick={() => onSubmitFile()}
+          className="btn btn-danger py-3 px-5"
+          style={{ fontSize: "24px" }}
+        >
+          <img
+            className="mr-4 pb-1"
+            style={{ height: "30px" }}
+            src={Upload}
+            alt="upload"
+          />
           Send Photo
         </button>
       </div>

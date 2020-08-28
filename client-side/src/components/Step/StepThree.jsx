@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from "react";
 import Human from "../../Images/docsWithID.png";
 import Camera from "../../Images/camera.png";
+import Upload from "../../Images/upload.png";
 import HeaderContext from "../../context/HeaderContext";
 import ExifOrientationImg from "react-exif-orientation-img";
 import ReactPlayer from "react-player";
@@ -106,8 +107,18 @@ const StepOne = () => {
       />
 
       <div className="text-center mb-5">
-        <button onClick={() => onSubmitFile()} className="btn btn-danger">
-          Send video
+        <button
+          onClick={() => onSubmitFile()}
+          className="btn btn-danger py-3 px-5"
+          style={{ fontSize: "24px" }}
+        >
+          <img
+            className="mr-4 pb-1"
+            style={{ height: "30px" }}
+            src={Upload}
+            alt="upload"
+          />
+          Send Photo
         </button>
       </div>
     </React.Fragment>

@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 import HeaderContext from "../../context/HeaderContext";
 // import CropImage from "../CropImage/Index";
 import CamPlus from "../../Images/camPlus.png";
+import Upload from "../../Images/upload.png";
 import IdWithFace from "../../Images/withID.png";
 import loadImage from "blueimp-load-image/js";
 const StepTwo = () => {
@@ -105,7 +106,7 @@ const StepTwo = () => {
           return (
             <div
               key={id}
-              className="text-center d-flex align-items-center"
+              className="text-center d-flex align-items-center justify-content-center"
               style={{ height: "100px", width: "120px" }}
             >
               <img
@@ -172,8 +173,18 @@ const StepTwo = () => {
         accept="image/*"
       />
 
-      <div className="text-center">
-        <button onClick={() => onSubmitFile()} className="btn btn-danger">
+      <div className="text-center mb-5">
+        <button
+          onClick={() => onSubmitFile()}
+          className="btn btn-danger py-3 px-5"
+          style={{ fontSize: "24px" }}
+        >
+          <img
+            className="mr-4 pb-1"
+            style={{ height: "30px" }}
+            src={Upload}
+            alt="upload"
+          />
           Send Photo
         </button>
       </div>
