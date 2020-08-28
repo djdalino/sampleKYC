@@ -56,10 +56,10 @@ const StepOne = () => {
       ) : null}
       <p className="text-center">Top of your head</p>
       <div
-        className="border position-relative mx-auto box-h300 box-w300"
+        className="border position-relative mx-auto box-h260 box-w250"
         onClick={handleInputFile}
       >
-        <div className="position-absolute border-inner-box box-h310 box-w225"></div>
+        <div className="position-absolute border-inner-box box-h270 box-w185"></div>
         <div className="position-absolute box-img w-75 py-10">
           <ExifOrientationImg
             crossOrigin="anonymous"
@@ -90,7 +90,6 @@ const StepOne = () => {
         onChange={onSelectFile}
         style={{ display: "none" }}
         accept="image/*"
-        capture
       />
 
       <div className="text-center mb-5">

@@ -2,11 +2,11 @@ import HeaderContext from "./HeaderContext";
 import React, { useState } from "react";
 
 function ContextWrapper({ children }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(3);
   const [src, setSrc] = useState(null);
   const [srcStepTwoB, setSrcStepTwoB] = useState(null);
   const [crop, setCrop] = useState({
-    unit: "px", // default, can be 'px' or '%'
+    unit: "px",
     x: 15,
     y: 15,
     width: 50,
@@ -16,6 +16,7 @@ function ContextWrapper({ children }) {
   const [upload, setUpload] = useState([]);
   const [stepOneUpload, setStepOneUpload] = useState(null);
   const [stepTwoUploadB, setStepTwoUploadB] = useState([]);
+  const [stepThreeUpload, setStepThreeUpload] = useState(null);
   let [imageRef] = useState(null);
   let [fileUrl] = useState(null);
   return (
@@ -38,7 +39,9 @@ function ContextWrapper({ children }) {
         croppedImageUrl,
         setCroppedImageUrl,
         imageRef,
-        fileUrl
+        fileUrl,
+        stepThreeUpload,
+        setStepThreeUpload
       }}
     >
       {children}

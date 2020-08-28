@@ -1,12 +1,12 @@
 import React, { useContext, useRef } from "react";
 import HeaderContext from "../../context/HeaderContext";
 // import CropImage from "../CropImage/Index";
-import Step from "../Common/Step";
+import CamPlus from "../../Images/camPlus.png";
 import IdWithFace from "../../Images/withID.png";
 import loadImage from "blueimp-load-image/js";
 const StepTwo = () => {
   const { stepTwoUploadB, setStepTwoUploadB } = useContext(HeaderContext);
-  //   const [count, setCount] = useState(0);
+  const { count, setCount } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -38,6 +38,7 @@ const StepTwo = () => {
       alert("Choose 2 images only");
     } else {
       alert("Image uploaded");
+      setCount(count + 1);
     }
   };
   const deleteItem = id => {
@@ -47,10 +48,23 @@ const StepTwo = () => {
   };
   return (
     <React.Fragment>
-      <Step
-        step="Step 2"
-        data="Take a Selfie with the 2 Valid IDs one by one"
-      />
+      <div className="d-flex justify-content-center my-3 mb-4 px-2">
+        <div className="px-1">
+          <img src={CamPlus} alt="Cam Plus" height="27" width="27" />
+        </div>
+        <h5
+          className="px-1"
+          style={{ color: "#3b5cf6", width: "7.5rem", fontSize: "22px" }}
+        >
+          Step 2
+        </h5>
+        <h5
+          className="px-1"
+          style={{ color: "grey", fontSize: "22px", width: "auto" }}
+        >
+          Take a Selfie with the 2 valid IDs one by one
+        </h5>
+      </div>
       {stepTwoUploadB.length === 1 ? (
         <div
           className="alert alert-warning alert-dismissible fade show"
@@ -82,6 +96,7 @@ const StepTwo = () => {
           </button>
         </div>
       ) : null}
+
       <p className="text-center mb-1">
         Choose 2 images only {stepTwoUploadB.length}/2
       </p>
@@ -118,6 +133,7 @@ const StepTwo = () => {
                 height="100%"
                 width="100%"
                 onClick={handleInputFile}
+                disabled={stepTwoUploadB > 2 ? true : false}
               />
             </div>
           )}

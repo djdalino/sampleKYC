@@ -18,14 +18,23 @@ p {
 .box-h260 {
   height: 260px;
 }
+.box-h270 {
+  height: 270px;
+}
 .box-h300 {
   height: 300px;
 }
 .box-h310 {
   height: 310px;
 }
+.box-w185 {
+  width: 185px;
+}
 .box-w225 {
   width: 225px;
+}
+.box-w250 {
+  width: 250px;
 }
 .box-w275 {
   width: 255px;

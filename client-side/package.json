@@ -12,6 +12,7 @@
     "react-exif-orientation-img": "^0.1.5",
     "react-fix-image-orientation": "^0.1.4",
     "react-image-crop": "^8.6.5",
+    "react-player": "^2.6.1",
     "react-scripts": "3.4.3"
   },
   "scripts": {

@@ -137,6 +137,7 @@ const StepTwo = () => {
                 height="100%"
                 width="100%"
                 onClick={handleInputFile}
+                disabled={upload > 2 ? true : false}
               />
             </div>
           )}
