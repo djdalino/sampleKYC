@@ -50,17 +50,17 @@ const StepTwo = () => {
     <React.Fragment>
       <div className="d-flex justify-content-center my-3 mb-4 px-2">
         <div className="px-1">
-          <img src={CamPlus} alt="Cam Plus" height="27" width="27" />
+          <img src={CamPlus} alt="Cam Plus" height="22" width="22" />
         </div>
         <h5
-          className="px-1"
-          style={{ color: "#3b5cf6", width: "7.5rem", fontSize: "22px" }}
+          className="px-1 m-0"
+          style={{ color: "#3b5cf6", width: "6.5rem", fontSize: "20px" }}
         >
           Step 2
         </h5>
         <h5
-          className="px-1"
-          style={{ color: "grey", fontSize: "22px", width: "auto" }}
+          className="px-1 m-0"
+          style={{ color: "grey", fontSize: "20px", width: "auto" }}
         >
           Take a Selfie with the 2 valid IDs one by one
         </h5>
