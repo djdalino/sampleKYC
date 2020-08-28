@@ -2,7 +2,7 @@ import HeaderContext from "./HeaderContext";
 import React, { useState } from "react";
 
 function ContextWrapper({ children }) {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [src, setSrc] = useState(null);
   const [srcStepTwoB, setSrcStepTwoB] = useState(null);
   const [crop, setCrop] = useState({
