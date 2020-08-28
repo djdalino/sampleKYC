@@ -57,7 +57,7 @@ const StepOne = () => {
         <div className="position-absolute border-inner-box box-h310 box-w225"></div>
         <div className="position-absolute box-img w-75 py-10">
           {stepThreeUpload ? (
-            <div className="position-relative">
+            <div className="position-relative h-100">
               <button
                 className="close position-absolute"
                 style={{
