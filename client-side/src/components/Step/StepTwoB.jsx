@@ -100,6 +100,25 @@ const StepTwo = () => {
       <p className="text-center mb-1">
         Choose 2 images only {stepTwoUploadB.length}/2
       </p>
+      <div className="d-flex justify-content-center mb-2">
+        {stepTwoUploadB.slice(0, 2).map((item, id) => {
+          return (
+            <div
+              key={id}
+              className="text-center d-flex align-items-center"
+              style={{ height: "100px", width: "120px" }}
+            >
+              <img
+                src={item}
+                alt="crop"
+                className="step-img-fluid"
+                height="100"
+                width="100"
+              />
+            </div>
+          );
+        })}
+      </div>
       <div className="border position-relative mx-auto box-h300 box-w300">
         <div className="position-absolute border-inner-box box-h310 box-w225"></div>
         <div className="position-absolute box-img w-90 h-100 py-10">

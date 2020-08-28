@@ -9,7 +9,7 @@ const StepTwo = () => {
   const { setSrc } = useContext(HeaderContext);
   const { setCrop } = useContext(HeaderContext);
   const { count, setCount } = useContext(HeaderContext);
-  //   const [count, setCount] = useState(0);
+
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -89,6 +89,7 @@ const StepTwo = () => {
           </button>
         </div>
       ) : null}
+
       <div className="mb-5">
         <p
           className="text-center"
@@ -96,6 +97,7 @@ const StepTwo = () => {
         >
           2 valid ids should be one of those:
         </p>
+
         <p
           className="text-center"
           style={{ color: "grey", fontSize: "14px", fontWeight: "300" }}
@@ -104,6 +106,25 @@ const StepTwo = () => {
         </p>
       </div>
       <p className="text-center mb-1">Choose 2 images only {upload.length}/2</p>
+      <div className="d-flex justify-content-center ">
+        {upload.slice(0, 2).map((item, id) => {
+          return (
+            <div
+              key={id}
+              className="text-center d-flex align-items-center"
+              style={{ height: "100px", width: "120px" }}
+            >
+              <img
+                src={item}
+                alt="crop"
+                className="step-img-fluid"
+                height="100"
+                width="100"
+              />
+            </div>
+          );
+        })}
+      </div>
       <div className="border position-relative mx-auto box-h200 box-w300">
         <div className="position-absolute border-inner-box box-h210 box-w225"></div>
         <div className="position-absolute box-img w-90 h-100 py-10">
