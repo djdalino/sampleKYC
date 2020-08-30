@@ -13,7 +13,6 @@ const StepOne = () => {
   const { setIsLoading } = useContext(HeaderContext);
   const { stepThreeUpload, setStepThreeUpload } = useContext(HeaderContext);
   const [uploadVideo, setUploadVideo] = useState(null);
-  const [isVideoLoading, setisVideoLoading] = useState(false);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -22,7 +21,6 @@ const StepOne = () => {
     if (e.target.files && e.target.files.length > 0) {
       setStepThreeUpload(URL.createObjectURL(e.target.files[0]));
       setUploadVideo(e.target.files[0]);
-      setisVideoLoading(true);
     }
   };
   const onSubmitFile = async () => {
@@ -31,6 +29,7 @@ const StepOne = () => {
     } else {
       setIsLoading(true);
       try {
+        const LOCAL_BASE_URL = "http://localhost:1337";
         const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
 
         const data = new FormData();
@@ -101,23 +100,12 @@ const StepOne = () => {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
-              {isVideoLoading && (
-                <div
-                  className="spinner-border text-primary isVideoLoading"
-                  role="status"
-                >
-                  <span className="sr-only">Loading...</span>
-                </div>
-              )}
 
               <ReactPlayer
                 controls
                 height="100%"
                 width="100%"
                 url={stepThreeUpload}
-                onReady={() => {
-                  setisVideoLoading(false);
-                }}
               />
             </div>
           ) : (

@@ -33,6 +33,7 @@ const StepOne = () => {
       setIsLoading(true);
 
       try {
+        const LOCAL_BASE_URL = "http://localhost:1337";
         const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
         const data = new FormData();
         data.append("files", selfieUpload);
@@ -87,12 +88,6 @@ const StepOne = () => {
             height="100%"
             width="100%"
           />
-          {/* <img
-            src={stepOneUpload ? stepOneUpload : Human}
-            alt="Your Selfie"
-            height="100%"
-            width="100%"
-          /> */}
         </div>
       </div>
       <p className="text-center">End of your torso</p>
