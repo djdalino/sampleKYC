@@ -45,6 +45,7 @@ const StepOne = () => {
 
         alert("Video uploaded!!");
         setIsLoading(false);
+        setPercent(0);
         window.location.reload(true);
       } catch (error) {
         alert(error);

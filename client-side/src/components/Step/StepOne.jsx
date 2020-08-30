@@ -41,13 +41,9 @@ const StepOne = () => {
           onUploadProgress: progress =>
             setPercent(calculatePercent(progress.loaded, progress.total))
         });
-        // const response = await axios({
-        //   method: "POST",
-        //   headers: { "Content-Type": "multipart/form-data" },
-        //   url: `${STRAPI_BASE_URL}/step-ones`,
-        //   data
-        // });
+
         setIsLoading(false);
+        setPercent(0);
         alert("Image uploaded");
         setCount(count + 1);
       } catch (error) {

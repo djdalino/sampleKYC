@@ -31,12 +31,12 @@ const LoadingPage = () => {
             style={{
               width: `${percent}%`,
               height: "5px",
-              backgroundColor: "blue"
+              backgroundColor: "#28a745"
             }}
           ></div>
           <div
             className="text-center"
-            style={{ width: "200px", color: "blue" }}
+            style={{ width: "200px", color: "#28a745" }}
           >{`${percent}%`}</div>
         </div>
       </div>
