@@ -27,7 +27,7 @@ const StepOne = () => {
   };
   const onSubmitFile = async () => {
     if (stepThreeUpload === null) {
-      alert("Please input image");
+      alert("Please input video");
     } else {
       setIsLoading(true);
       try {
@@ -43,8 +43,9 @@ const StepOne = () => {
             setPercent(calculatePercent(progress.loaded, progress.total))
         });
 
-        alert("Image uploaded");
+        alert("Video uploaded!!");
         setIsLoading(false);
+        location.reload();
       } catch (error) {
         alert(error);
         setIsLoading(false);
@@ -54,12 +55,7 @@ const StepOne = () => {
   const deleteItem = () => {
     setStepThreeUpload(null);
   };
-  // React.useEffect(() => {
-  //   setisVideoLoading(true);
-  //   setTimeout(() => {
-  //     setisVideoLoading(false);
-  //   }, 5000);
-  // }, []);
+
   return (
     <React.Fragment>
       <LoadingPage />
@@ -115,7 +111,6 @@ const StepOne = () => {
 
               <ReactPlayer
                 controls
-                playing
                 height="100%"
                 width="100%"
                 url={stepThreeUpload}
