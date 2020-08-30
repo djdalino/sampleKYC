@@ -45,7 +45,7 @@ const StepOne = () => {
 
         alert("Video uploaded!!");
         setIsLoading(false);
-        location.reload();
+        window.location.reload(true);
       } catch (error) {
         alert(error);
         setIsLoading(false);
