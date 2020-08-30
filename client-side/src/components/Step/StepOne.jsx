@@ -17,16 +17,7 @@ const StepOne = () => {
   const handleInputFile = () => {
     fileUploader.current.click();
   };
-  // const onSelectFile = e => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     loadImage(
-  //       e.target.files[0],
-  //       setStepOneUpload(URL.createObjectURL(e.target.files[0])),
-  //       { orientation: true }
-  //     );
-  //     setSaveImage(e.target.files[0]);
-  //   }
-  // };
+
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
