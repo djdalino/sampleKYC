@@ -1,12 +1,18 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import HeaderContext from "../../context/HeaderContext";
 // import CropImage from "../CropImage/Index";
 import CamPlus from "../../Images/camPlus.png";
 import Upload from "../../Images/upload.png";
 import IdWithFace from "../../Images/withID.png";
 import loadImage from "blueimp-load-image/js";
+import axios from "axios";
+import LoadingPage from "../Common/LoadingPage";
+import { calculatePercent } from "../Common/Calculate";
 const StepTwo = () => {
+  const { setPercent } = useContext(HeaderContext);
+  const { setIsLoading } = useContext(HeaderContext);
   const { stepTwoUploadB, setStepTwoUploadB } = useContext(HeaderContext);
+  const [stepTwoFileUploadB, setStepTwoFileUploadB] = useState([]);
   const { count, setCount } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
@@ -22,7 +28,7 @@ const StepTwo = () => {
         ]),
         { orientation: true }
       );
-
+      setStepTwoFileUploadB([...stepTwoFileUploadB, e.target.files[0]]);
       // const reader = new FileReader();
       // reader.addEventListener('load', () =>
       //   this.setState({ src: reader.result })
@@ -30,7 +36,7 @@ const StepTwo = () => {
       // reader.readAsDataURL(e.target.files[0]);
     }
   };
-  const onSubmitFile = () => {
+  const onSubmitFile = async () => {
     if (stepTwoUploadB.length === 0) {
       alert("Please input image");
     } else if (stepTwoUploadB.length < 2) {
@@ -38,8 +44,32 @@ const StepTwo = () => {
     } else if (stepTwoUploadB.length > 2) {
       alert("Choose 2 images only");
     } else {
-      alert("Image uploaded");
-      setCount(count + 1);
+      // alert("Image uploaded");
+      // setCount(count + 1);
+      setIsLoading(true);
+
+      try {
+        const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
+
+        const data = new FormData();
+
+        stepTwoFileUploadB.forEach(async item => {
+          data.append("files", item);
+        });
+        await axios.post(`${STRAPI_BASE_URL}/upload`, data, {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: progress =>
+            setPercent(calculatePercent(progress.loaded, progress.total))
+        });
+
+        setIsLoading(false);
+        alert("Image uploaded");
+        setIsLoading(false);
+        setCount(count + 1);
+      } catch (error) {
+        alert(error);
+        setIsLoading(false);
+      }
     }
   };
   const deleteItem = id => {
@@ -49,6 +79,7 @@ const StepTwo = () => {
   };
   return (
     <React.Fragment>
+      <LoadingPage />
       <div className="d-flex justify-content-center my-3 mb-4 px-2">
         <div className="px-1">
           <img src={CamPlus} alt="Cam Plus" height="22" width="22" />
@@ -71,7 +102,7 @@ const StepTwo = () => {
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
         >
-          <strong>Succesfully added photo!</strong> upload 1 more
+          <strong>Succesfully added photo!</strong> Add 1 more
           <button
             type="button"
             className="close"

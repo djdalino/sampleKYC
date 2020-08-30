@@ -1,43 +1,74 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Step from "../Common/Step";
 import Human from "../../Images/human.png";
 import Upload from "../../Images/upload.png";
 import HeaderContext from "../../context/HeaderContext";
 import ExifOrientationImg from "react-exif-orientation-img";
-import loadImage from "blueimp-load-image/js";
+import LoadingPage from "../Common/LoadingPage";
+import { calculatePercent } from "../Common/Calculate";
+import axios from "axios";
 const StepOne = () => {
+  const { setPercent } = useContext(HeaderContext);
+  const { setIsLoading } = useContext(HeaderContext);
   const { stepOneUpload, setStepOneUpload } = useContext(HeaderContext);
+  const [selfieUpload, setSelfieUpload] = useState(null);
   const { count, setCount } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
   };
+  // const onSelectFile = e => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     loadImage(
+  //       e.target.files[0],
+  //       setStepOneUpload(URL.createObjectURL(e.target.files[0])),
+  //       { orientation: true }
+  //     );
+  //     setSaveImage(e.target.files[0]);
+  //   }
+  // };
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
-      loadImage(
-        e.target.files[0],
-        setStepOneUpload(URL.createObjectURL(e.target.files[0])),
-        { orientation: true }
-      );
-
-      // const reader = new FileReader();
-      // reader.addEventListener('load', () =>
-      //   this.setState({ src: reader.result })
-      // );
-      // reader.readAsDataURL(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setStepOneUpload(reader.result));
+      reader.readAsDataURL(e.target.files[0]);
+      setSelfieUpload(e.target.files[0]);
     }
   };
-  const onSubmitFile = () => {
+  const onSubmitFile = async e => {
     if (!stepOneUpload) {
       alert("Please input image");
     } else {
-      alert("Image uploaded");
-      setCount(count + 1);
+      setIsLoading(true);
+
+      try {
+        const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
+        const data = new FormData();
+        data.append("files", selfieUpload);
+        await axios.post(`${STRAPI_BASE_URL}/upload`, data, {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: progress =>
+            setPercent(calculatePercent(progress.loaded, progress.total))
+        });
+        // const response = await axios({
+        //   method: "POST",
+        //   headers: { "Content-Type": "multipart/form-data" },
+        //   url: `${STRAPI_BASE_URL}/step-ones`,
+        //   data
+        // });
+        setIsLoading(false);
+        alert("Image uploaded");
+        setCount(count + 1);
+      } catch (error) {
+        alert(error);
+        setIsLoading(false);
+      }
     }
   };
 
   return (
     <React.Fragment>
+      <LoadingPage />
       <Step step="Step 1" data="take a selfie" />
       {stepOneUpload ? (
         <div

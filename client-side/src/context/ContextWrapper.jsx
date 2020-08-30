@@ -14,14 +14,19 @@ function ContextWrapper({ children }) {
   });
   const [croppedImageUrl, setCroppedImageUrl] = useState(null);
   const [upload, setUpload] = useState([]);
+  const [stepTwoFileUpload, setStepTwoFileUpload] = useState([]);
   const [stepOneUpload, setStepOneUpload] = useState(null);
   const [stepTwoUploadB, setStepTwoUploadB] = useState([]);
   const [stepThreeUpload, setStepThreeUpload] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [percent, setPercent] = useState(0);
   let [imageRef] = useState(null);
   let [fileUrl] = useState(null);
   return (
     <HeaderContext.Provider
       value={{
+        percent,
+        setPercent,
         count,
         setCount,
         src,
@@ -32,6 +37,8 @@ function ContextWrapper({ children }) {
         setCrop,
         upload,
         setUpload,
+        stepTwoFileUpload,
+        setStepTwoFileUpload,
         stepOneUpload,
         setStepOneUpload,
         stepTwoUploadB,
@@ -41,7 +48,9 @@ function ContextWrapper({ children }) {
         imageRef,
         fileUrl,
         stepThreeUpload,
-        setStepThreeUpload
+        setStepThreeUpload,
+        isLoading,
+        setIsLoading
       }}
     >
       {children}

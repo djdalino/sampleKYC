@@ -5,10 +5,15 @@ import Upload from "../../Images/upload.png";
 import HeaderContext from "../../context/HeaderContext";
 import ExifOrientationImg from "react-exif-orientation-img";
 import ReactPlayer from "react-player";
-
+import LoadingPage from "../Common/LoadingPage";
+import { calculatePercent } from "../Common/Calculate";
+import axios from "axios";
 const StepOne = () => {
+  const { setPercent } = useContext(HeaderContext);
+  const { setIsLoading } = useContext(HeaderContext);
   const { stepThreeUpload, setStepThreeUpload } = useContext(HeaderContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const [uploadVideo, setUploadVideo] = useState(null);
+  const [isVideoLoading, setisVideoLoading] = useState(false);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
@@ -16,28 +21,48 @@ const StepOne = () => {
   const onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
       setStepThreeUpload(URL.createObjectURL(e.target.files[0]));
-      console.log(e.target.files);
-      setIsLoading(true);
+      setUploadVideo(e.target.files[0]);
+      setisVideoLoading(true);
     }
   };
-  const onSubmitFile = () => {
+  const onSubmitFile = async () => {
     if (stepThreeUpload === null) {
       alert("Please input image");
     } else {
-      alert("Video uploaded");
+      setIsLoading(true);
+      try {
+        const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
+
+        const data = new FormData();
+
+        data.append("files", uploadVideo);
+
+        await axios.post(`${STRAPI_BASE_URL}/upload`, data, {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: progress =>
+            setPercent(calculatePercent(progress.loaded, progress.total))
+        });
+
+        alert("Image uploaded");
+        setIsLoading(false);
+      } catch (error) {
+        alert(error);
+        setIsLoading(false);
+      }
     }
   };
   const deleteItem = () => {
     setStepThreeUpload(null);
   };
   // React.useEffect(() => {
-  //   setIsLoading(true);
+  //   setisVideoLoading(true);
   //   setTimeout(() => {
-  //     setIsLoading(false);
+  //     setisVideoLoading(false);
   //   }, 5000);
   // }, []);
   return (
     <React.Fragment>
+      <LoadingPage />
       {stepThreeUpload ? (
         <div
           className="alert alert-success alert-dismissible fade show"
@@ -79,9 +104,9 @@ const StepOne = () => {
               >
                 <span aria-hidden="true">&times;</span>
               </button>
-              {isLoading && (
+              {isVideoLoading && (
                 <div
-                  className="spinner-border text-primary isLoading"
+                  className="spinner-border text-primary isVideoLoading"
                   role="status"
                 >
                   <span className="sr-only">Loading...</span>
@@ -95,7 +120,7 @@ const StepOne = () => {
                 width="100%"
                 url={stepThreeUpload}
                 onReady={() => {
-                  setIsLoading(false);
+                  setisVideoLoading(false);
                 }}
               />
             </div>

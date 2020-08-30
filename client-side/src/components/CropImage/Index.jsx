@@ -7,7 +7,7 @@ const CropImage = () => {
   const { upload, setUpload } = useContext(HeaderContext);
   const { crop, setCrop } = useContext(HeaderContext);
   const { croppedImageUrl, setCroppedImageUrl } = useContext(HeaderContext);
-
+  const { stepTwoFileUpload, setStepTwoFileUpload } = useContext(HeaderContext);
   //   const onSelectFile = e => {
   //     if (e.target.files && e.target.files.length > 0) {
   //       const reader = new FileReader();
@@ -20,36 +20,37 @@ const CropImage = () => {
   //     imageRef = image;
   //   };
 
-  //   const onCropComplete = crop => {
-  //     makeClientCrop(crop);
-  //   };
+  const onCropComplete = () => {
+    makeClientCrop(crop);
+  };
 
   //   const onCropChange = (crop, percentCrop) => {
   //     // You could also use percentCrop:
   //     // setState({ crop: percentCrop });
   //     setCrop(crop);
   //   };
-  //   const makeClientCrop = async crop => {
-  //     if (imageRef && crop.width && crop.height) {
-  //       const croppedImageUrl = await getCroppedImg(
-  //         imageRef,
-  //         crop,
-  //         "newFile.jpeg"
-  //       );
-  //       setCroppedImageUrl(croppedImageUrl);
-  //     }
-  //   };
+  const makeClientCrop = async () => {
+    if (croppedImageUrl && crop.width && crop.height) {
+      const croppedImage = await getCroppedImg(
+        croppedImageUrl,
+        crop,
+        "newFile.jpeg"
+      );
+      setUpload([...upload, window.URL.createObjectURL(croppedImage)]);
+      setStepTwoFileUpload([...stepTwoFileUpload, croppedImage]);
+    }
+  };
 
-  const getCroppedImg = () => {
+  const getCroppedImg = (image, crop, fileName) => {
     const canvas = document.createElement("canvas");
-    const scaleX = croppedImageUrl.naturalWidth / croppedImageUrl.width;
-    const scaleY = croppedImageUrl.naturalHeight / croppedImageUrl.height;
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
     canvas.width = crop.width;
     canvas.height = crop.height;
     const ctx = canvas.getContext("2d");
 
     ctx.drawImage(
-      croppedImageUrl,
+      image,
       crop.x * scaleX,
       crop.y * scaleY,
       crop.width * scaleX,
@@ -60,8 +61,8 @@ const CropImage = () => {
       crop.height
     );
     // As Base64 string
-    const base64Image = canvas.toDataURL("image/png");
-    setUpload([...upload, base64Image]);
+    // const base64Image = canvas.toDataURL("image/png");
+    // setUpload([...upload, base64Image]);
     setSrc(null);
     setCrop({
       unit: "px", // default, can be 'px' or '%'
@@ -83,6 +84,18 @@ const CropImage = () => {
     //     resolve(fileUrl);
     //   }, "image/jpeg");
     // });
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        blob => {
+          blob.name = fileName;
+          // setUpload([...upload, window.URL.createObjectURL(blob)]);
+          // setStepTwoFileUpload([...stepTwoFileUpload, blob]);
+          resolve(blob);
+        },
+        "image/jpeg",
+        1
+      );
+    });
   };
 
   return (
@@ -110,7 +123,7 @@ const CropImage = () => {
           className="text-center m-5 position-fixed"
           style={{ zIndex: "1000" }}
         >
-          <button className="btn btn-primary" onClick={getCroppedImg}>
+          <button className="btn btn-primary" onClick={onCropComplete}>
             Crop
           </button>
         </div>

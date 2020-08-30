@@ -4,33 +4,30 @@ import HeaderContext from "../../context/HeaderContext";
 import Step from "../Common/Step";
 import Card from "../../Images/card.png";
 import Upload from "../../Images/upload.png";
-import loadImage from "blueimp-load-image/js";
+// import loadImage from "blueimp-load-image/js";
+import LoadingPage from "../Common/LoadingPage";
+import { calculatePercent } from "../Common/Calculate";
+import axios from "axios";
 const StepTwo = () => {
+  const { setPercent } = useContext(HeaderContext);
+  const { setIsLoading } = useContext(HeaderContext);
   const { upload, setUpload } = useContext(HeaderContext);
   const { setSrc } = useContext(HeaderContext);
   const { setCrop } = useContext(HeaderContext);
   const { count, setCount } = useContext(HeaderContext);
-
+  const { stepTwoFileUpload } = useContext(HeaderContext);
   const fileUploader = useRef(null);
   const handleInputFile = () => {
     fileUploader.current.click();
   };
   const handleFileOnChange = e => {
     if (e.target.files && e.target.files.length > 0) {
-      loadImage(
-        e.target.files[0],
-        setSrc(URL.createObjectURL(e.target.files[0])),
-        { orientation: true }
-      );
-
-      // const reader = new FileReader();
-      // reader.addEventListener('load', () =>
-      //   this.setState({ src: reader.result })
-      // );
-      // reader.readAsDataURL(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setSrc(reader.result));
+      reader.readAsDataURL(e.target.files[0]);
     }
   };
-  const onSubmitFile = () => {
+  const onSubmitFile = async () => {
     if (upload.length === 0) {
       alert("Please input image");
     } else if (upload.length < 2) {
@@ -38,6 +35,7 @@ const StepTwo = () => {
     } else if (upload.length > 2) {
       alert("Choose 2 images only");
     } else {
+      setIsLoading(true);
       setCrop({
         unit: "px", // default, can be 'px' or '%'
         x: 15,
@@ -45,9 +43,27 @@ const StepTwo = () => {
         width: 50,
         height: 50
       });
+      try {
+        const STRAPI_BASE_URL = "https://minikyc.herokuapp.com";
 
-      alert("Image uploaded");
-      setCount(count + 1);
+        const data = new FormData();
+
+        stepTwoFileUpload.forEach(async item => {
+          data.append("files", item);
+        });
+        await axios.post(`${STRAPI_BASE_URL}/upload`, data, {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: progress =>
+            setPercent(calculatePercent(progress.loaded, progress.total))
+        });
+
+        alert("Image uploaded");
+        setIsLoading(false);
+        setCount(count + 1);
+      } catch (error) {
+        alert(error);
+        setIsLoading(false);
+      }
     }
   };
   const deleteItem = id => {
@@ -58,13 +74,14 @@ const StepTwo = () => {
   };
   return (
     <React.Fragment>
+      <LoadingPage />
       <Step step="Step 2" data="Take a Photo of 2 valid id" />
       {upload.length === 1 ? (
         <div
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
         >
-          <strong>Succesfully added photo!</strong> upload 1 more
+          <strong>Succesfully added photo!</strong> Add 1 more
           <button
             type="button"
             className="close"
